@@ -64,7 +64,7 @@ class NavBar extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const VideosScreen()),
+                MaterialPageRoute(builder: (context) => VideosScreen()),
               );
             },
           ),
@@ -74,7 +74,7 @@ class NavBar extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const VideosScreen()),
+                MaterialPageRoute(builder: (context) => VideosScreen()),
               );
             },
           ),
@@ -84,7 +84,7 @@ class NavBar extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const VideosScreen()),
+                MaterialPageRoute(builder: (context) => VideosScreen()),
               );
             },
           ),
@@ -94,7 +94,7 @@ class NavBar extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const VideosScreen()),
+                MaterialPageRoute(builder: (context) => VideosScreen()),
               );
             },
           ),
