@@ -112,6 +112,8 @@ class _ShelterListPageState extends State<ShelterListPage> {
   }
 }
 
+//Adrian Estevez | 2021-1263
+
 class ShelterDetailsPage extends StatelessWidget {
   final Shelter shelter;
 
