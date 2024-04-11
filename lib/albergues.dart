@@ -153,6 +153,8 @@ class ShelterDetailsPage extends StatelessWidget {
   }
 }
 
+//Adrian Estevez | 2021-1263
+
 class MapWidget extends StatefulWidget {
   final LatLng initialPosition;
   final String city;
