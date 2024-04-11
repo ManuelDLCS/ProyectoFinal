@@ -3,9 +3,10 @@ import 'package:proyecto_final/main.dart';
 import 'noticia.dart';
 import 'video.dart';
 import 'servicio.dart';
+import 'albergues.dart'; // Importamos el archivo de albergues
 
 class NavBar extends StatelessWidget {
-  const NavBar({super.key});
+  const NavBar({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +67,16 @@ class NavBar extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => VideosScreen()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.home),
+            title: const Text('Albergues'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ShelterListPage()),
               );
             },
           ),
