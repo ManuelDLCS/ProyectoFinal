@@ -1,16 +1,14 @@
-# proyecto_final
+# Proyecto Final, Grupo Mobile Masters
 
-A new Flutter project.
+Compuesto por: 
 
-## Getting Started
+- Dariel Eduardo Restituyo Polanco. 2021-2291
 
-This project is a starting point for a Flutter application.
+- Manuel de Jesús De la Cruz Solano. 2021-1967
 
-A few resources to get you started if this is your first Flutter project:
+- Julio Emanuel Alberto Carrillo. 2021-0182
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- Adrián Estevez. 2021-1263
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Roberto Adrián Cuevas Méndez. 2020-10486
+
