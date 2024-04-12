@@ -3,7 +3,7 @@ import 'package:proyecto_final/main.dart';
 import 'noticia.dart';
 import 'video.dart';
 import 'servicio.dart';
-import 'albergues.dart'; // Importamos el archivo de albergues
+import 'albergues.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({Key? key});
