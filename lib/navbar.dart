@@ -81,32 +81,12 @@ class NavBar extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.description),
-            title: const Text('Acerca de'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => VideosScreen()),
-              );
-            },
-          ),
-          ListTile(
             leading: const Icon(Icons.design_services_sharp),
             title: const Text('Servicios'),
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => ServicioScreen()),
-              );
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.computer),
-            title: const Text('Contrátame'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => VideosScreen()),
               );
             },
           ),
