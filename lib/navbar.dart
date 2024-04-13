@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_final/historia.dart';
 import 'package:proyecto_final/main.dart';
+import 'package:proyecto_final/miembros.dart';
+import 'historia.dart';
 import 'noticia.dart';
 import 'video.dart';
 import 'servicio.dart';
@@ -51,12 +54,22 @@ class NavBar extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.description),
-            title: const Text('Noticias'),
+            leading: const Icon(Icons.library_books_outlined),
+            title: const Text('Historia'),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const NoticiasScreen()),
+                MaterialPageRoute(builder: (context) => const HistoriaScreen()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.supervised_user_circle_outlined),
+            title: const Text('Miembros'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MiembrosScreen()),
               );
             },
           ),
