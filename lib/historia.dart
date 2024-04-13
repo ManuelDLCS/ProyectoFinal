@@ -15,13 +15,14 @@ class HistoriaScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            // Puedes agregar una imagen que represente la historia o la entidad
-            /*
-            Image.asset(
-              'assets/defensa_civil_history.jpg',
-              fit: BoxFit.cover,
-            ),*/
-            const SizedBox(height: 20),
+            Center(
+              // Este widget centra su contenido horizontalmente
+              child: Image.asset(
+                'assets/defensa_civil_history.jpg',
+                width: 200, // Puedes ajustar el tamaño como necesites
+              ),
+            ),
+            const SizedBox(height: 20), // Espaciado entre imagen y texto
             // Título de la sección
             const Text(
               '¿Qué es la Defensa Civil?',
