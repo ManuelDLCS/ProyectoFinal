@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:proyecto_final/main.dart';
 import 'noticia.dart';
 import 'video.dart';
-import 'servicio.dart';
 
 class NavBar extends StatelessWidget {
   const NavBar({super.key});
@@ -80,12 +79,12 @@ class NavBar extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.design_services_sharp),
-            title: const Text('Servicios'),
+            leading: const Icon(Icons.favorite),
+            title: const Text('En mi Vida'),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ServicioScreen()),
+                MaterialPageRoute(builder: (context) => VideosScreen()),
               );
             },
           ),
