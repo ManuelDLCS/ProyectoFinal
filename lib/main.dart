@@ -125,8 +125,11 @@ class Noticia {
   final String descripcion;
   final String fecha;
 
-  Noticia(
-      {required this.titulo, required this.descripcion, required this.fecha});
+  Noticia({
+    required this.titulo,
+    required this.descripcion,
+    required this.fecha,
+  });
 
   factory Noticia.fromJson(Map<String, dynamic> json) {
     return Noticia(
@@ -137,18 +140,63 @@ class Noticia {
   }
 }
 
-// modelo de Video
 class Video {
   final String titulo;
   final String url;
 
-  Video({required this.titulo, required this.url});
+  Video({
+    required this.titulo,
+    required this.url,
+  });
 
   factory Video.fromJson(Map<String, dynamic> json) {
     return Video(
       titulo: json['titulo'],
       url: json['url'],
     );
+  }
+}
+
+class Albergue {
+  final String ciudad;
+  final String edificio;
+  final String coordinador;
+  final String telefono;
+  final String capacidad;
+  final double latitud;
+  final double longitud;
+
+  Albergue({
+    required this.ciudad,
+    required this.edificio,
+    required this.coordinador,
+    required this.telefono,
+    required this.capacidad,
+    required this.latitud,
+    required this.longitud,
+  });
+
+  factory Albergue.fromJson(Map<String, dynamic> json) {
+    return Albergue(
+      ciudad: json['ciudad'],
+      edificio: json['edificio'],
+      coordinador: json['coordinador'],
+      telefono: json['telefono'],
+      capacidad: json['capacidad'],
+      latitud: double.parse(json['latitud']),
+      longitud: double.parse(json['longitud']),
+    );
+  }
+}
+
+Future<List<Albergue>> fetchAlbergues() async {
+  final response =
+      await http.get(Uri.parse('https://adamix.net/defensa_civil/albergues'));
+  if (response.statusCode == 200) {
+    List<dynamic> data = jsonDecode(response.body);
+    return data.map((item) => Albergue.fromJson(item)).toList();
+  } else {
+    throw Exception('Error al cargar los albergues');
   }
 }
 

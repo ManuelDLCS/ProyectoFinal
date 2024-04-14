@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_final/historia.dart';
 import 'package:proyecto_final/main.dart';
+import 'package:proyecto_final/miembros.dart';
+import 'historia.dart';
 import 'noticia.dart';
 import 'video.dart';
 import 'servicio.dart';
 import 'volunterRegistration.dart'; // Asegúrate de que el nombre sea correcto
 import 'VolunteerListViewPage.dart'; // Importación de la página de lista de voluntarios
 import 'medidasPreventivas.dart'; // Asegúrate de que el nombre del archivo y la clase sean correctos
+import 'albergues.dart';
 
 class NavBar extends StatelessWidget {
-  const NavBar({super.key});
+  const NavBar({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +39,20 @@ class NavBar extends StatelessWidget {
             leading: const Icon(Icons.home),
             title: const Text('Inicio'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const MyApp()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MyApp()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.library_books_outlined),
+            title: const Text('Historia'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const HistoriaScreen()),
+              );
             },
           ),
           ListTile(
@@ -45,7 +62,7 @@ class NavBar extends StatelessWidget {
               Navigator.push(context, MaterialPageRoute(builder: (context) => ServicioScreen()));
             },
           ),
-          ListTile(
+           ListTile(
             leading: const Icon(Icons.description),
             title: const Text('Noticias'),
             onTap: () {
@@ -56,7 +73,20 @@ class NavBar extends StatelessWidget {
             leading: const Icon(Icons.video_collection),
             title: const Text('Galería de Videos'),
             onTap: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => VideosScreen()));
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => VideosScreen()),
+              );
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.home),
+            title: const Text('Albergues'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ShelterListPage()),
+              );
             },
           ),
           ListTile(
@@ -67,6 +97,16 @@ class NavBar extends StatelessWidget {
             },
           ),
           ListTile(
+            leading: const Icon(Icons.supervised_user_circle_outlined),
+            title: const Text('Miembros'),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const MiembrosScreen()),
+              );
+            },
+          ),
+            ListTile(
             leading: const Icon(Icons.people),
             title: const Text('Quiero ser Voluntario'),
             onTap: () {
