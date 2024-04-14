@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class NoticiasScreen extends StatefulWidget {
-  const NoticiasScreen({super.key});
+  const NoticiasScreen({Key? key}) : super(key: key);
 
   @override
   _NoticiasScreenState createState() => _NoticiasScreenState();
@@ -48,33 +48,58 @@ class _NoticiasScreenState extends State<NoticiasScreen> {
         backgroundColor: Colors.orange,
         foregroundColor: Colors.white,
       ),
-      body: ListView.builder(
-        itemCount: noticias.length,
-        itemBuilder: (context, index) {
-          final noticia = noticias[index];
-          return Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: Column(
-              children: [
-                Text(
-                  noticia['titulo'] ?? 'Sin título',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/defensa.png'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: ListView.builder(
+          itemCount: noticias.length,
+          itemBuilder: (context, index) {
+            final noticia = noticias[index];
+            return Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.3),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      spreadRadius: 3,
+                      blurRadius: 5,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
                 ),
-                const SizedBox(height: 8),
-                Container(
-                  margin: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Text(
-                    noticia['contenido'] ?? 'Sin descripción',
-                    textAlign: TextAlign.justify,
-                  ),
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  children: [
+                    Text(
+                      noticia['titulo'] ?? 'Sin título',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      noticia['contenido'] ?? 'Sin descripción',
+                      textAlign: TextAlign.justify,
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          );
-        },
+              ),
+            );
+          },
+        ),
       ),
     );
   }

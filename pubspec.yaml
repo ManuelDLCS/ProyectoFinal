@@ -32,9 +32,10 @@ dependencies:
     sdk: flutter
   http: ^0.13.3
   url_launcher: ^6.0.0
-  youtube_player_flutter: ^9.0.0
-
-
+  youtube_player_flutter: ^9.0.1
+  sqflite: ^2.0.0+3
+  path_provider: ^2.0.2  
+  intl: ^0.17.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
@@ -69,6 +70,14 @@ flutter:
     - assets/imagen1.png
     - assets/imagen2.jpg
     - assets/imagen3.png
+    - assets/Manuelito.jpg
+    - assets/julio.jpeg
+    - assets/dariel.jpeg
+    - assets/adrian.jpeg
+    - assets/roberto.jpeg
+    - assets/compu.gif
+    - assets/defensa.png
+
     - assets/defensa_civil_history.jpg
   #   - images/a_dot_ham.jpeg
 
