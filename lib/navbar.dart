@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:proyecto_final/acercade.dart';
 import 'package:proyecto_final/main.dart';
 import 'noticia.dart';
 import 'video.dart';
+import 'servicio.dart';
 
 class NavBar extends StatelessWidget {
-  const NavBar({super.key});
+  const NavBar({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +15,16 @@ class NavBar extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
+            decoration: const BoxDecoration(
+              color: Colors.orange,
+            ),
             accountName: const Text(
               'Defensa Civil',
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.white),
             ),
             accountEmail: const Text(
               'MobileMasters',
-              style: TextStyle(color: Colors.black),
+              style: TextStyle(color: Colors.white),
             ),
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
@@ -27,14 +32,6 @@ class NavBar extends StatelessWidget {
                   'assets/df.png',
                   fit: BoxFit.cover,
                 ),
-              ),
-            ),
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                  'assets/defensacivil.png',
-                ),
-                fit: BoxFit.cover,
               ),
             ),
           ),
@@ -64,37 +61,27 @@ class NavBar extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const VideosScreen()),
+                MaterialPageRoute(builder: (context) => VideosScreen()),
               );
             },
           ),
           ListTile(
-            leading: const Icon(Icons.description),
+            leading: const Icon(Icons.info),
             title: const Text('Acerca de'),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const VideosScreen()),
+                MaterialPageRoute(builder: (context) => AcercaDeScreen()),
               );
             },
           ),
           ListTile(
-            leading: const Icon(Icons.favorite),
-            title: const Text('En mi Vida'),
+            leading: const Icon(Icons.design_services_sharp),
+            title: const Text('Servicios'),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const VideosScreen()),
-              );
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.computer),
-            title: const Text('Contrátame'),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => const VideosScreen()),
+                MaterialPageRoute(builder: (context) => ServicioScreen()),
               );
             },
           ),

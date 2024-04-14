@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class VideosScreen extends StatefulWidget {
   const VideosScreen({Key? key}) : super(key: key);
@@ -9,7 +11,7 @@ class VideosScreen extends StatefulWidget {
 }
 
 class _VideosScreenState extends State<VideosScreen> {
-  late List<dynamic> videos;
+  late List<dynamic> videos = []; // Inicializa videos como una lista vacía
 
   @override
   void initState() {
@@ -39,48 +41,47 @@ class _VideosScreenState extends State<VideosScreen> {
     }
   }
 
-class VideosScreen extends StatelessWidget {
-  const VideosScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Videos'),
+        title: const Text(
+          'Videos',
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.orange,
       ),
-      body: videos != null
-          ? videos.isEmpty
-              ? const Center(child: CircularProgressIndicator())
-              : ListView.builder(
-                  itemCount: videos.length,
-                  itemBuilder: (context, index) {
-                    final video = videos[index];
-                    return ListTile(
-                      title: Text(video['titulo'] ?? 'Sin título'),
-                      subtitle: Text(video['descripcion'] ?? 'Sin descripción'),
-                      onTap: () {
-                        String videoId = video['link'];
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => YoutubePlayer(
-                              controller: YoutubePlayerController(
-                                initialVideoId: videoId,
-                                flags: const YoutubePlayerFlags(
-                                  autoPlay: true,
-                                  mute: false,
-                                ),
-                              ),
-                              showVideoProgressIndicator: true,
+      body: videos
+              .isEmpty // Verifica si la lista está vacía en lugar de si es null
+          ? const Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: videos.length,
+              itemBuilder: (context, index) {
+                final video = videos[index];
+                return ListTile(
+                  title: Text(video['titulo'] ?? 'Sin título'),
+                  subtitle: Text(video['descripcion'] ?? 'Sin descripción'),
+                  onTap: () {
+                    String videoId = video['link'];
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => YoutubePlayer(
+                          controller: YoutubePlayerController(
+                            initialVideoId: videoId,
+                            flags: const YoutubePlayerFlags(
+                              autoPlay: true,
+                              mute: false,
                             ),
                           ),
-                        );
-                      },
+                          showVideoProgressIndicator: true,
+                        ),
+                      ),
                     );
                   },
-                )
-          : const Center(child: CircularProgressIndicator()),
+                );
+              },
+            ),
     );
   }
-}
 }

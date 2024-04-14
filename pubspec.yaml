@@ -32,7 +32,7 @@ dependencies:
     sdk: flutter
   http: ^0.13.3
   url_launcher: ^6.0.12
-  youtube_player_flutter: ^9.0.0
+  youtube_player_flutter: ^9.0.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -42,7 +42,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
+  carousel_slider: ^4.2.1
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -65,6 +65,17 @@ flutter:
   assets:
     - assets/defensacivil.png
     - assets/df.png
+    - assets/imagen1.png
+    - assets/imagen2.jpg
+    - assets/imagen3.png
+    - assets/Manuelito.jpg
+    - assets/julio.jpeg
+    - assets/dariel.jpeg
+    - assets/adrian.jpeg
+    - assets/roberto.jpeg
+    - assets/compu.gif
+    - assets/defensa.png
+
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
