@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
-        android:label="Your App Name"
+        android:label="Defensa Civil"
         android:icon="@mipmap/ic_launcher">
         
         <!-- Agrega la clave de la API de Google Maps dentro de la etiqueta <application> -->
