@@ -155,6 +155,16 @@ class NavBar extends StatelessWidget {
                             builder: (context) => VolunteerListViewPage()));
                   },
                 ),
+                ListTile(
+                  leading: const Icon(Icons.home),
+                  title: const Text('Acerca de'),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => AcercaDeScreen()),
+                    );
+                  },
+                ),
                 if (isLoggedIn) ...[
                   Divider(), // Añade una línea divisoria
                   ListTile(
