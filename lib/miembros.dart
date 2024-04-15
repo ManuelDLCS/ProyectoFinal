@@ -25,7 +25,9 @@ class MiembrosScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Miembros'),
+        title: const Text('Miembros',
+            style: TextStyle(color: Colors.white)), // Texto blanco
+        backgroundColor: Colors.orange, // Color de fondo naranja
       ),
       body: FutureBuilder<List<dynamic>>(
         future: fetchMembers(),
