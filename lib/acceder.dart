@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:proyecto_final/clave.dart';
 import 'dart:convert';
 import 'package:proyecto_final/main.dart';
 import 'package:proyecto_final/token.dart';
+import 'package:proyecto_final/userdata.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AccederScreen extends StatelessWidget {
@@ -55,6 +57,18 @@ class _LoginFormState extends State<LoginForm> {
 
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setBool('isLoggedIn', true);
+
+        if (responseData.containsKey('datos')) {
+          final datos = responseData['datos'];
+          if (datos is Map<String, dynamic>) {
+            UserData.correo = datos['correo'];
+            UserData.clave = datos['clave'];
+            if (datos.containsKey('token')) {
+              UserData.token = datos['token'];
+            }
+          }
+        }
+
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => MyApp()),
@@ -69,6 +83,13 @@ class _LoginFormState extends State<LoginForm> {
     } else {
       print('Error en el inicio de sesión: ${response.body}');
     }
+  }
+
+  void _navigateToChangePassword() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CambiarClaveScreen()),
+    );
   }
 
   @override
@@ -126,6 +147,11 @@ class _LoginFormState extends State<LoginForm> {
               backgroundColor: Colors.orange,
               padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
             ),
+          ),
+          SizedBox(height: 10),
+          TextButton(
+            onPressed: _navigateToChangePassword,
+            child: Text('¿Olvidaste tu contraseña?'),
           ),
         ],
       ),
