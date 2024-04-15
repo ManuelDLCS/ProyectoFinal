@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:proyecto_final/main.dart';
+import 'package:proyecto_final/token.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AccederScreen extends StatelessWidget {
@@ -26,14 +27,14 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   final _formKey = GlobalKey<FormState>();
-  late String _username;
+  late String _identification;
   late String _password;
 
   Future<void> _iniciarSesion() async {
     final url =
         Uri.parse('https://adamix.net/defensa_civil/def/iniciar_sesion.php');
     final response = await http.post(url, body: {
-      'cedula': _username,
+      'cedula': _identification,
       'clave': _password,
     });
 
@@ -41,6 +42,11 @@ class _LoginFormState extends State<LoginForm> {
       final responseData = jsonDecode(response.body);
       final bool success = responseData['exito'];
       if (success) {
+        //Obtener el token de la api
+        TokenApi tokenApi = TokenApi();
+        final String token = responseData['datos']['token'];
+        tokenApi.token = token;
+
         SharedPreferences prefs = await SharedPreferences.getInstance();
         await prefs.setBool('isLoggedIn', true);
         Navigator.pushReplacement(
@@ -69,7 +75,7 @@ class _LoginFormState extends State<LoginForm> {
         children: <Widget>[
           TextFormField(
             decoration: InputDecoration(
-              labelText: 'Correo',
+              labelText: 'Cedula',
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
@@ -78,7 +84,7 @@ class _LoginFormState extends State<LoginForm> {
               return null;
             },
             onSaved: (value) {
-              _username = value!;
+              _identification = value!;
             },
           ),
           SizedBox(height: 20),
