@@ -3,6 +3,7 @@ import 'package:proyecto_final/VolunteerListViewPage.dart';
 import 'package:proyecto_final/acceder.dart';
 import 'package:proyecto_final/acercade.dart';
 import 'package:proyecto_final/albergues.dart';
+import 'package:proyecto_final/clave.dart';
 import 'package:proyecto_final/historia.dart';
 import 'package:proyecto_final/main.dart';
 import 'package:proyecto_final/mapa_situacion.dart';
@@ -228,6 +229,16 @@ class NavBar extends StatelessWidget {
                       );
                     },
                   ),
+                if (isLoggedIn)
+                  ListTile(
+                      leading: const Icon(Icons.key),
+                      title: const Text('Cambiar Contraseña'),
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CambiarClaveScreen()));
+                      }),
               ],
             ),
           );
