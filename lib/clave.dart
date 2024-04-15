@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:proyecto_final/token.dart'; // Asegúrate de que la ruta del import sea correcta
 
 class CambiarClaveScreen extends StatelessWidget {
   @override
@@ -24,15 +25,34 @@ class CambiarClaveForm extends StatefulWidget {
 
 class _CambiarClaveFormState extends State<CambiarClaveForm> {
   final _formKey = GlobalKey<FormState>();
-  late String _token;
   late String _oldPassword;
   late String _newPassword;
+  String? _token;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadToken();
+  }
+
+  void _loadToken() {
+    final token = TokenApi();
+    _token = token.token;
+  }
 
   Future<void> _cambiarClave() async {
+    if (_token == null) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Token no disponible'),
+        backgroundColor: Colors.red,
+      ));
+      return;
+    }
+
     final url =
         Uri.parse('https://adamix.net/defensa_civil/def/cambiar_clave.php');
     final response = await http.post(url, body: {
-      'token': _token,
+      'token': _token!,
       'clave_anterior': _oldPassword,
       'clave_nueva': _newPassword,
     });
@@ -64,21 +84,6 @@ class _CambiarClaveFormState extends State<CambiarClaveForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          TextFormField(
-            decoration: InputDecoration(
-              labelText: 'Token',
-            ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Por favor ingresa el token';
-              }
-              return null;
-            },
-            onSaved: (value) {
-              _token = value!;
-            },
-          ),
-          SizedBox(height: 20),
           TextFormField(
             decoration: InputDecoration(
               labelText: 'Contraseña Anterior',

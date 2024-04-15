@@ -164,7 +164,8 @@ class NavBar extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Noticias_Especificas()));
+                              builder: (context) =>
+                                  NoticiasEspecificasScreen()));
                     },
                   ),
                   ListTile(
@@ -184,7 +185,7 @@ class NavBar extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MisSituracionesScreen()));
+                              builder: (context) => MisSituacionesScreen()));
                     },
                   ),
                   ListTile(
