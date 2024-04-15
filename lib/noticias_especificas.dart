@@ -53,7 +53,6 @@ class _NoticiasEspecificasScreenState extends State<NoticiasEspecificasScreen> {
       appBar: AppBar(
         title: const Text('Noticias Específicas'),
         backgroundColor: Colors.orange,
-        foregroundColor: Colors.white,
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
@@ -61,12 +60,47 @@ class _NoticiasEspecificasScreenState extends State<NoticiasEspecificasScreen> {
               itemCount: noticiasEspecificas.length,
               itemBuilder: (context, index) {
                 final noticia = noticiasEspecificas[index];
-                return ListTile(
-                  title: Text(noticia['titulo']),
-                  subtitle: Text(noticia['contenido']),
+                return Card(
+                  margin: EdgeInsets.all(10),
+                  child: ListTile(
+                    title: Text(noticia['titulo'],
+                        style: TextStyle(
+                            color: Colors.orange, fontWeight: FontWeight.bold)),
+                    subtitle: Text(noticia['contenido']),
+                    onTap: () {
+                      _showNoticiaDetails(noticia);
+                    },
+                  ),
                 );
               },
             ),
+    );
+  }
+
+  void _showNoticiaDetails(dynamic noticia) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(noticia['titulo']),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text('Fecha: ${noticia['fecha']}'),
+                Text('Contenido: ${noticia['contenido']}'),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: Text('Cerrar', style: TextStyle(color: Colors.orange)),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

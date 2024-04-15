@@ -11,10 +11,16 @@ class AccederScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Iniciar Sesión'),
+        backgroundColor: Colors.orange,
+        foregroundColor: Colors.white,
       ),
       body: Padding(
         padding: EdgeInsets.all(20.0),
-        child: LoginForm(),
+        child: Center(
+          child: SingleChildScrollView(
+            child: LoginForm(),
+          ),
+        ),
       ),
     );
   }
@@ -41,8 +47,8 @@ class _LoginFormState extends State<LoginForm> {
     if (response.statusCode == 200) {
       final responseData = jsonDecode(response.body);
       final bool success = responseData['exito'];
+      print(responseData);
       if (success) {
-        //Obtener el token de la api
         TokenApi tokenApi = TokenApi();
         final String token = responseData['datos']['token'];
         tokenApi.token = token;
@@ -51,8 +57,7 @@ class _LoginFormState extends State<LoginForm> {
         await prefs.setBool('isLoggedIn', true);
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(
-              builder: (context) => MyApp()), // Navegar a la página de inicio
+          MaterialPageRoute(builder: (context) => MyApp()),
         );
       } else {
         final String errorMessage = responseData['mensaje'];
@@ -75,11 +80,13 @@ class _LoginFormState extends State<LoginForm> {
         children: <Widget>[
           TextFormField(
             decoration: InputDecoration(
-              labelText: 'Cedula',
+              labelText: 'Cédula',
+              border: OutlineInputBorder(),
+              prefixIcon: Icon(Icons.account_circle),
             ),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Por favor ingresa tu nombre de usuario';
+                return 'Por favor ingresa tu cédula';
               }
               return null;
             },
@@ -91,6 +98,8 @@ class _LoginFormState extends State<LoginForm> {
           TextFormField(
             decoration: InputDecoration(
               labelText: 'Clave',
+              border: OutlineInputBorder(),
+              prefixIcon: Icon(Icons.lock),
             ),
             obscureText: true,
             validator: (value) {
@@ -112,6 +121,11 @@ class _LoginFormState extends State<LoginForm> {
               }
             },
             child: Text('Iniciar sesión'),
+            style: ElevatedButton.styleFrom(
+              foregroundColor: Colors.white,
+              backgroundColor: Colors.orange,
+              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+            ),
           ),
         ],
       ),

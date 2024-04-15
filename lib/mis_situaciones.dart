@@ -21,31 +21,44 @@ class _MisSituacionesScreenState extends State<MisSituacionesScreen> {
   Future<void> _fetchSituaciones() async {
     final token = TokenApi();
     String? yourAuthToken = token.token;
-    final response = await http.post(
-      Uri.parse('https://adamix.net/defensa_civil/def/situaciones.php'),
-      body: {'token': yourAuthToken},
-    );
+    final url =
+        Uri.parse('https://adamix.net/defensa_civil/def/situaciones.php');
+    final response = await http.post(url, body: {
+      'token': yourAuthToken,
+    });
 
-    try {
-      if (response.statusCode == 200) {
-        final responseData = jsonDecode(response.body);
-        if (responseData['exito']) {
-          setState(() {
-            situaciones = responseData['datos'];
-            isLoading = false;
-          });
-        } else {
-          // Mostrar mensaje de error
-          print('Error: ${responseData['mensaje']}');
-        }
+    if (response.statusCode == 200) {
+      final responseData = jsonDecode(response.body);
+      if (responseData['exito']) {
+        setState(() {
+          situaciones = responseData['datos'];
+          isLoading = false;
+        });
       } else {
-        // Manejar errores
-        print(
-            'Failed to fetch situaciones with status code: ${response.statusCode}');
+        _showErrorDialog(responseData['mensaje']);
       }
-    } on Exception catch (e) {
-      Exception(e);
+    } else {
+      _showErrorDialog(
+          'Error al conectar con el servidor, código de estado: ${response.statusCode}');
     }
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Error'),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -63,10 +76,13 @@ class _MisSituacionesScreenState extends State<MisSituacionesScreen> {
                 final situacion = situaciones[index];
                 return Card(
                   child: ListTile(
-                    leading: Image.memory(base64Decode(situacion['foto'])),
-                    title: Text(situacion['titulo']),
+                    leading: situacion['foto'] != null
+                        ? Image.network(situacion['foto'],
+                            width: 50, height: 50, fit: BoxFit.cover)
+                        : Icon(Icons.image_not_supported),
+                    title: Text(situacion['titulo'] ?? 'Sin título'),
                     subtitle: Text(
-                        'Reportado el: ${situacion['fecha']} - Estado: ${situacion['estado']}'),
+                        'Reportado el ${situacion['fecha']} - Estado: ${situacion['estado']}'),
                     isThreeLine: true,
                     onTap: () => _mostrarDetallesSituacion(situacion),
                   ),
@@ -88,12 +104,9 @@ class _MisSituacionesScreenState extends State<MisSituacionesScreen> {
                 Text('Código: ${situacion['codigo']}'),
                 Text('Fecha: ${situacion['fecha']}'),
                 Text('Descripción: ${situacion['descripcion']}'),
-                Container(
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
-                  height: 200.0,
-                  child: Image.memory(base64Decode(situacion['foto']),
-                      fit: BoxFit.cover),
-                ),
+                situacion['foto'] != null
+                    ? Image.network(situacion['foto'], fit: BoxFit.cover)
+                    : Text('No hay imagen disponible'),
                 Text('Estado: ${situacion['estado']}'),
                 Text('Comentarios: ${situacion['comentarios'] ?? "Ninguno"}'),
               ],

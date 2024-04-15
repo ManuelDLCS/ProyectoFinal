@@ -58,23 +58,44 @@ class _ReportarSituacionScreenState extends State<ReportarSituacionScreen> {
     if (_posicion == null || _imagen == null) {
       print('No se ha seleccionado imagen o ubicación.');
       return;
-    } else {
-      final bytes = await _imagen!.readAsBytes();
-      String _base64Imagen = base64Encode(bytes);
+    }
 
-      final token = TokenApi();
-      String? yourAuthToken = token.token;
+    final bytes = await _imagen!.readAsBytes();
+    String _base64Imagen = base64Encode(bytes);
+
+    final token = TokenApi();
+    String? yourAuthToken = token.token;
+    final url =
+        Uri.parse('https://adamix.net/defensa_civil/def/nueva_situacion.php');
+
+    try {
       final response = await http.post(
-        Uri.parse('https://adamix.net/defensa_civil/def/nueva_situacion.php'),
+        url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
         body: jsonEncode({
           'titulo': _tituloController.text,
           'descripcion': _descripcionController.text,
           'foto': _base64Imagen,
           'latitud': _posicion!.latitude.toString(),
           'longitud': _posicion!.longitude.toString(),
-          'token': yourAuthToken
+          'token': yourAuthToken,
         }),
       );
+
+      if (response.statusCode == 200) {
+        var responseData = jsonDecode(response.body);
+        if (responseData['exito']) {
+          print('Situación reportada con éxito.');
+        } else {
+          print('Error al reportar situación: ${responseData['mensaje']}');
+        }
+      } else {
+        print('Error con la solicitud HTTP: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('Error al enviar la solicitud: $e');
     }
   }
 
